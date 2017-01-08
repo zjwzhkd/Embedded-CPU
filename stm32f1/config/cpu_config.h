@@ -26,8 +26,4 @@
 /* #define CPU_USE_16BIT_TICK */
 /* #define CPU_INTERRUPT_NOT_NESTING */
 
-/* OS宏定义 ------------------------------------------------------------------*/
-#define CPU_USE_OS_SCHEDULER
-/* #define CPU_USE_OS_FREERTOS */
-
 #endif  /* __CPU_CONFIG_H */
