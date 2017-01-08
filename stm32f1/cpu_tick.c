@@ -13,7 +13,6 @@
                                     全局变量
 
 *******************************************************************************/
-static ListHead_t cpuTickIRQList;
 static uint32_t fac_us = 0;
 
 /*******************************************************************************
@@ -27,66 +26,9 @@ void cpu_TickInit(void)
 #ifdef CPU_TICK_PERIOD_IS_1MS
     CPU_Assert(CPU_TICK_HZ == 1000);
 #endif
-    list_Init(&cpuTickIRQList);
     fac_us = CPU_TIMER_HZ/1000000;
     /*初始化SysTick*/
     SysTick_Config(CPU_TIMER_HZ/CPU_TICK_HZ);
-}
-
-/**
- * 注册节拍中断请求
- *
- * @param irq: 待注册的节拍中断请求的结构体指针
- *
- * @param period: 节拍中断请求的周期
- *
- * @param isr: 节拍中断请求的处理函数指针
- */
-void cpu_TickIRQRegister(TickIRQ_t *irq, tick_t period, TickIRQHandler_t isr)
-{
-cpu_t cpu_sr;
-
-    /*参数检验*/
-    CPU_Assert(0 != period);
-    CPU_Assert(0 != isr);
-    /*注册节拍中断*/
-    list_Init(&irq->node);
-    irq->period = period;
-    irq->count  = period-1;
-    irq->isr    = isr;
-    cpu_sr = CPU_EnterCritical();
-    {
-        list_Add(&cpuTickIRQList, &irq->node);
-    }
-    CPU_ExitCritical(cpu_sr);
-}
-
-/**
- * (总)节拍中断处理函数
- *
- * @note: 以CPU_TICK_HZ的频率, 在CPU节拍中断函数中调用
- */
-void cpu_TickHandler(void)
-{
-ListNode_t *pos;
-TickIRQ_t  *irq;
-
-    list_for_each(pos, &cpuTickIRQList)
-    {
-        irq = list_entry(pos, TickIRQ_t, node);
-        if (irq->period > 0)
-        {
-            if (irq->count > 0)
-            {
-                irq->count--;
-            }
-            else
-            {
-                irq->count = irq->period - 1;
-                (irq->isr)();
-            }
-        }
-    }
 }
 
 /*******************************************************************************
