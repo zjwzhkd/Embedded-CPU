@@ -14,13 +14,8 @@
 #include "cpu_port.h"
 
 /* 节拍转换宏 ----------------------------------------------------------------*/
-#ifdef CPU_TICK_PERIOD_IS_1MS
-    #define CPU_MS_TO_TICK(nms)     ( nms )
-    #define CPU_TICK_TO_MS(ntick)   ( ntick )
-#else
-    #define CPU_MS_TO_TICK(nms)     ( (uint32_t)(nms)*CPU_TICK_HZ/1000 )
-    #define CPU_TICK_TO_MS(ntick)   ( (uint32_t)(ntick)*1000/CPU_TICK_HZ )
-#endif
+#define CPU_MS_TO_TICK(nms)     ( (tick_t)((uint32_t)(nms)*CPU_TICK_HZ/1000) )
+#define CPU_TICK_TO_MS(ntick)   ( (uint32_t)(ntick)*1000/CPU_TICK_HZ )
 
 /* 接口函数 ------------------------------------------------------------------*/
 void cpu_TickInit(void);

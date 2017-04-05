@@ -17,25 +17,31 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-/* 数据类型 ------------------------------------------------------------------*/
-/*CPU体系数据类型*/
+/* 架构定义 ------------------------------------------------------------------*/
+/* CPU中断嵌套设置 */
+/* #define CPU_INTERRUPT_NOT_NESTING */
+
+/* CPU内存字节对齐 */
+#define CPU_BYTE_ALIGNMENT              ( 8 )
+
+/* CPU体系数据类型 */
 typedef int32_t         base_t;
 typedef uint32_t        ubase_t;
 typedef base_t          cpu_t;
 
-/*节拍类型*/
-#ifdef CPU_USE_16BIT_TICK
+/* 节拍类型 ------------------------------------------------------------------*/
+#if CPU_16BIT_TICK_EN
     typedef uint16_t    tick_t;
 #else
     typedef uint32_t    tick_t;
 #endif
 
 /* 编译器宏 ------------------------------------------------------------------*/
-/*声明数据保存在FLASH上*/
+/* 声明数据保存在FLASH上 */
 #define FLASH_DATA
-/*声明数据保存在EEPROM上*/
+/* 声明数据保存在EEPROM上 */
 #define EEPROM_DATA
-/*静态内联函数*/
+/* 静态内联函数 */
 #ifndef STATIC_INLINE
     #define STATIC_INLINE static inline
 #endif
@@ -67,21 +73,14 @@ typedef base_t          cpu_t;
 #endif
 
 /* 调试相关宏 ----------------------------------------------------------------*/
-/*调试断言*/
+/* 调试断言 */
 #if CPU_ASSERT_EN
     #define CPU_Assert(expr)    do { if (!(expr)) {CPU_DisableInterrupts();while(1);} } while(0)
 #else
     #define CPU_Assert(expr)    ((void)0)
 #endif
 
-/*调试代码覆盖*/
-#if CPU_COVERAGE_EN
-    #define CPU_Coverage()      CPU_NOP()
-#else
-    #define CPU_Coverage()      ((void)0)
-#endif
-
-/*调试输出*/
+/* 调试输出 */
 #if CPU_PRINTF_EN
     #include <stdio.h>
     #define CPU_Printf(...)     printf(__VA_ARGS__)
@@ -99,7 +98,7 @@ typedef base_t          cpu_t;
 #define CPU_RESET()             NVIC_SystemReset()
 
 /* CPU中断管理 ---------------------------------------------------------------*/
-/*判断CPU是否处于处理模式*/
+/* 判断CPU是否处于处理模式 */
 #define cpu_InHandlerMode()     ( 0 != __get_IPSR() )
 
 #define cpu_irq_enable()        __enable_irq()

@@ -20,12 +20,9 @@ static uint32_t fac_us = 0;
                                     节拍函数
 
 *******************************************************************************/
-/*CPU节拍以及时间管理初始化*/
+/* CPU节拍以及时间管理初始化 */
 void cpu_TickInit(void)
 {
-#ifdef CPU_TICK_PERIOD_IS_1MS
-    CPU_Assert(CPU_TICK_HZ == 1000);
-#endif
     fac_us = CPU_TIMER_HZ/1000000;
     /*初始化SysTick*/
     SysTick_Config(CPU_TIMER_HZ/CPU_TICK_HZ);
