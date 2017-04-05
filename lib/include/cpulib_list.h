@@ -12,6 +12,13 @@
 /* 头文件 --------------------------------------------------------------------*/
 #include "cpulib_def.h"
 
+/* 宏定义 --------------------------------------------------------------------*/
+/* 通过结构体成员变量指针获得结构体指针 */
+#ifndef container_of
+    #define container_of(ptr, type, member) \
+        ( (type *)((char *)(ptr) - offsetof(type, member)) )
+#endif
+
 /* 链表数据结构 --------------------------------------------------------------*/
 struct list_head
 {
@@ -50,19 +57,19 @@ typedef struct list_head ListNode_t;  /*链表结点结构类型*/
     for (pos = (head)->next, tmp = pos->next; pos != (head); pos = tmp, tmp = pos->next)
 
 /* 链表操作函数 --------------------------------------------------------------*/
-/*初始化链表头或者链表结点*/
+/* 初始化链表头或者链表结点 */
 void list_Init( struct list_head *list );
 
-/*判断链表是否为空或者判断链表结点是否孤立*/
+/* 判断链表是否为空或者判断链表结点是否孤立 */
 bool list_IsEmpty( struct list_head *list );
 
-/*向链表起始位置添加一个链表结点*/
+/* 向链表起始位置添加一个链表结点 */
 void list_Add( ListHead_t *head, ListNode_t *node );
 
-/*向链表尾部位置添加一个链表结点*/
+/* 向链表尾部位置添加一个链表结点 */
 void list_AddTail( ListHead_t *head, ListNode_t *node );
 
-/*从链表中移除指定的链表结点*/
+/* 从链表中移除指定的链表结点 */
 void list_Del( ListNode_t *node );
 
 #endif  /* __CPULIB_LIST_H */
