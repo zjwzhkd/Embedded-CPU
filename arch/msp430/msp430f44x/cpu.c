@@ -30,8 +30,6 @@ void cpu_Init(void)
 /* 系统时钟初始化 */
 static void prvSystemClockConfig(void)
 {
-volatile uint16_t i;
-
     /* FLL+ Control Register 0
      * 7        6       5:4     3       2       1       0
      * DCOPLUS  XTS_FLL XCAPxPF XT2OF   XT1OF   LFOF    DCOF
@@ -51,7 +49,7 @@ volatile uint16_t i;
     do
     {
         IFG1 &= ~OFIFG;
-        for (i = 50000; i; i--);
+        cpu_DelayMs(100);
     }
     while (IFG1 & OFIFG);
 }

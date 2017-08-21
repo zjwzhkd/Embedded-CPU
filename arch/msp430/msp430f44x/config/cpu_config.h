@@ -16,7 +16,7 @@
 #define CPU_SMCLK_HZ        ( (uint32_t) 3997696 )  /* MSP430 SMCLK频率(Hz)   */
 #define CPU_FREQ_HZ         ( CPU_MCLK_HZ )         /* CPU运行频率(Hz)        */
 #define CPU_TIMER_HZ        ( CPU_ACLK_HZ )         /* CPU节拍定时器频率(Hz)  */
-#define CPU_TICK_HZ         ( (uint32_t) 128 )      /* CPU节拍频率(Hz)        */
+#define CPU_TICK_HZ         ( (uint32_t) 16 )       /* CPU节拍频率(Hz)        */
 
 /* 功能配置 ------------------------------------------------------------------*/
 #define CPU_ASSERT_EN       ( 1 )                   /* 调试断言功能使能       */

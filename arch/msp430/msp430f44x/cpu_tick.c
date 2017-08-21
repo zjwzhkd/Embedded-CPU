@@ -15,6 +15,7 @@
 *******************************************************************************/
 void cpu_TickInit(void)
 {
-    BTCTL = BT_fCLK2_DIV256;
+    //BTCTL = BT_fCLK2_DIV256;
+    BTCTL = BT_ADLY_64;
     IE2 |= BTIE;
 }
