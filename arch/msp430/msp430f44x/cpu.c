@@ -35,6 +35,11 @@ static void prvSystemClockConfig(void)
      * DCOPLUS  XTS_FLL XCAPxPF XT2OF   XT1OF   LFOF    DCOF
      */
     FLL_CTL0 = XCAP18PF;
+    /* FLL+ Control Register 1
+     * 7    6           5       4:3     2       1:0
+     * NC   SMCLKOFF    XT2OFF  SELMx   SELS    FLL_DIVx
+     */
+    FLL_CTL1 = XT2OFF;
     /* System Clock Frequency Integrator Register 0
      * 7:6      5:2     1:0
      * FLLDx    FN_x    MODx(LSBs)
