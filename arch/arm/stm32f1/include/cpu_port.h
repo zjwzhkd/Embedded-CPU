@@ -27,7 +27,7 @@
 /* CPU体系数据类型 */
 typedef int32_t         base_t;
 typedef uint32_t        ubase_t;
-typedef base_t          cpu_t;
+typedef ubase_t         cpu_t;
 
 /* 节拍类型 ------------------------------------------------------------------*/
 #if CPU_16BIT_TICK_EN
