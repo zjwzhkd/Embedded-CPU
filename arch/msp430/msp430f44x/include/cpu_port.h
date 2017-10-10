@@ -45,6 +45,8 @@ typedef __istate_t      cpu_t;
 #ifndef STATIC_INLINE
     #define STATIC_INLINE static inline
 #endif
+/* 编译断言 */
+#define COMPILE_ASSERT(EXPR)    {typedef char ASSERT_ARRAY[(EXPR) ? 1 : -1];}
 
 /* 中断/临界区宏 -------------------------------------------------------------*/
 /* 全局中断使能/禁止 */
