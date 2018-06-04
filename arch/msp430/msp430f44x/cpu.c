@@ -30,6 +30,8 @@ void cpu_Init(void)
 /* 系统时钟初始化 */
 static void prvSystemClockConfig(void)
 {
+uint8_t count = 40;
+
     /* FLL+ Control Register 0
      * 7        6       5:4     3       2       1       0
      * DCOPLUS  XTS_FLL XCAPxPF XT2OF   XT1OF   LFOF    DCOF
@@ -54,7 +56,9 @@ static void prvSystemClockConfig(void)
     do
     {
         IFG1 &= ~OFIFG;
-        cpu_DelayMs(100);
+        cpu_DelayMs(20);
+        count--;
+        if (count == 0) CPU_RESET();
     }
     while (IFG1 & OFIFG);
 }
