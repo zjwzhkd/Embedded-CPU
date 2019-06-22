@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm8s_tim4.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    30-September-2014
+  * @version V2.3.0
+  * @date    16-June-2017
   * @brief   This file contains all the functions for the TIM4 peripheral.
    ******************************************************************************
   * @attention
@@ -346,7 +346,7 @@ void TIM4_ClearFlag(TIM4_FLAG_TypeDef TIM4_FLAG)
   /* Check the parameters */
   assert_param(IS_TIM4_GET_FLAG_OK(TIM4_FLAG));
 
-  /* Clear the flags (rc_w0) clear this bit by writing 0. Writing ‘1’ has no effect*/
+  /* Clear the flags (rc_w0) clear this bit by writing 0. Writing ??has no effect*/
   TIM4->SR1 = (uint8_t)(~TIM4_FLAG);
 }
 

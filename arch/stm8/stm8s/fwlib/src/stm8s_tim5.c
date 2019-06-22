@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm8s_tim5.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    30-September-2014
+  * @version V2.3.0
+  * @date    16-June-2017
   * @brief   This file contains all the functions for the TIM5 peripheral.
    ******************************************************************************
   * @attention
@@ -425,7 +425,7 @@ void TIM5_UpdateRequestConfig(TIM5_UpdateSource_TypeDef TIM5_UpdateSource)
 }
 
 /**
-  * @brief  Selects the TIM5’s One Pulse Mode.
+  * @brief  Selects the TIM5æŠ¯ One Pulse Mode.
   * @param   TIM5_OPMode specifies the OPM Mode to be used.
   * This parameter can be one of the following values
   *                    - TIM5_OPMODE_SINGLE
@@ -1067,7 +1067,7 @@ FlagStatus TIM5_GetFlagStatus(TIM5_FLAG_TypeDef TIM5_FLAG)
 }
 
 /**
-  * @brief  Clears the TIM5’s pending flags.
+  * @brief  Clears the TIM5æŠ¯ pending flags.
   * @param   TIM5_FLAG specifies the flag to clear.
   * This parameter can be one of the following values:
   *                       - TIM5_FLAG_UPDATE: TIM5 update Flag
@@ -1084,7 +1084,7 @@ void TIM5_ClearFlag(TIM5_FLAG_TypeDef TIM5_FLAG)
   /* Check the parameters */
   assert_param(IS_TIM5_CLEAR_FLAG_OK(TIM5_FLAG));
 
-  /* Clear the flags (rc_w0) clear this bit by writing 0. Writing ‘1’ has no effect*/
+  /* Clear the flags (rc_w0) clear this bit by writing 0. Writing ??has no effect*/
   TIM5->SR1 = (uint8_t)(~((uint8_t)(TIM5_FLAG)));
   TIM5->SR2 &= (uint8_t)(~((uint8_t)((uint16_t)TIM5_FLAG >> 8)));
 }

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm8s_it.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    30-September-2014
+  * @version V2.3.0
+  * @date    16-June-2017
   * @brief   This file contains the headers of the interrupt handlers
    ******************************************************************************
   * @attention
@@ -80,10 +80,10 @@
 #endif /* (STM8S208) || (STM8S207) || (STM8S105) || (STM8AF52Ax) || (STM8AF62Ax) || (STM8A626x) */
 
 #if defined (STM8S208) || defined(STM8S207) || defined(STM8S007) || defined(STM8S103) || \
-    defined(STM8S003) ||  defined (STM8AF52Ax) || defined (STM8AF62Ax) || defined (STM8S903)
+    defined (STM8S001) || defined(STM8S003) ||  defined (STM8AF52Ax) || defined (STM8AF62Ax) || defined (STM8S903)
  INTERRUPT void UART1_TX_IRQHandler(void); /* UART1 TX */
  INTERRUPT void UART1_RX_IRQHandler(void); /* UART1 RX */
-#endif /* (STM8S208) || (STM8S207) || (STM8S903) || (STM8S103) || (STM8AF52Ax) || (STM8AF62Ax) */
+#endif /* (STM8S208) || (STM8S207) || (STM8S903) || (STM8S103) || (STM8S001) || (STM8AF52Ax) || (STM8AF62Ax) */
 
 #if defined (STM8AF622x)
  INTERRUPT void UART4_TX_IRQHandler(void); /* UART4 TX */
