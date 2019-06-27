@@ -4,7 +4,7 @@
 * 创 建 者: Keda Huang
 * 版    本: V1.0
 * 创建日期: 2016-10-13
-* 文件说明: CPU底层定义
+* 文件说明: CPU接口定义
 *******************************************************************************/
 
 #ifndef __CPU_PORT_H
@@ -17,28 +17,36 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-/* 数据类型 ------------------------------------------------------------------*/
+/* 架构定义 ------------------------------------------------------------------*/
+/* CPU中断嵌套设置 */
+/* #define CPU_INTERRUPT_NOT_NESTING */
+
+/* CPU内存字节对齐 */
+#define CPU_BYTE_ALIGNMENT              ( 1 )
+
 /*CPU体系数据类型*/
 typedef int8_t          base_t;
 typedef uint8_t         ubase_t;
 typedef __istate_t      cpu_t;
 
-/*节拍类型*/
-#ifdef CPU_USE_16BIT_TICK
+/* 节拍类型 ------------------------------------------------------------------*/
+#if CPU_16BIT_TICK_EN
     typedef uint16_t    tick_t;
 #else
     typedef uint32_t    tick_t;
 #endif
 
 /* 编译器宏 ------------------------------------------------------------------*/
-/*声明数据保存在FLASH上*/
+/* 声明数据保存在FLASH上 */
 #define FLASH_DATA
-/*声明数据保存在EEPROM上*/
-#define EEPROM_DATA
-/*静态内联函数*/
+/* 声明数据保存在EEPROM上 */
+#define EEPROM_DATA __eeprom
+/* 静态内联函数 */
 #ifndef STATIC_INLINE
     #define STATIC_INLINE static inline
 #endif
+/* 编译断言 */
+#define COMPILE_ASSERT(EXPR)    {typedef char ASSERT_ARRAY[(EXPR) ? 1 : -1];}
 
 /* 中断/临界区宏 -------------------------------------------------------------*/
 /* 全局中断使能/禁止 */
@@ -67,21 +75,14 @@ typedef __istate_t      cpu_t;
 #endif
 
 /* 调试相关宏 ----------------------------------------------------------------*/
-/*调试断言*/
+/* 调试断言 */
 #if CPU_ASSERT_EN
     #define CPU_Assert(expr)    do { if (!(expr)) {CPU_DisableInterrupts();while(1);} } while(0)
 #else
     #define CPU_Assert(expr)    ((void)0)
 #endif
 
-/*调试代码覆盖*/
-#if CPU_COVERAGE_EN
-    #define CPU_Coverage()      CPU_NOP()
-#else
-    #define CPU_Coverage()      ((void)0)
-#endif
-
-/*调试输出*/
+/* 调试输出 */
 #if CPU_PRINTF_EN
     #include <stdio.h>
     #define CPU_Printf(...)     printf(__VA_ARGS__)

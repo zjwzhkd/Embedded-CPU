@@ -18,16 +18,7 @@
 
 /* CPU调试配置 ---------------------------------------------------------------*/
 #define CPU_ASSERT_EN       ( 1 )                   /* 调试断言功能使能       */
-#define CPU_COVERAGE_EN     ( 1 )                   /* 调试代码覆盖功能使能   */
 #define CPU_PRINTF_EN       ( 1 )                   /* 调试输出功能使能       */
-
-/* CPU宏定义 -----------------------------------------------------------------*/
-/* #define CPU_TICK_PERIOD_IS_1MS */
-/* #define CPU_USE_16BIT_TICK */
-#define CPU_INTERRUPT_NOT_NESTING                   /* STM8S中断优先级设置为3 */
-
-/* OS宏定义 ------------------------------------------------------------------*/
-#define CPU_USE_OS_SCHEDULER
-/* #define CPU_USE_OS_FREERTOS */
+#define CPU_16BIT_TICK_EN   ( 0 )                   /* 16bit节拍类型使能      */
 
 #endif  /* __CPU_CONFIG_H */
