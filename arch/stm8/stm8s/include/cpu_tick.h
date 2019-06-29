@@ -18,8 +18,8 @@
 #define CPU_TICK_TO_MS(ntick)   ( (uint32_t)(ntick)*1000/CPU_TICK_HZ )
 
 /* 延时函数 ------------------------------------------------------------------*/
-#define cpu_DelayUs(nus)        cpu_DelayCycle( (uint32_t)(nus)*(CPU_TIMER_HZ/1000000) )
-#define cpu_DelayMs(nms)        cpu_DelayCycle( (uint32_t)(nms)*(CPU_TIMER_HZ/1000) )
+#define cpu_DelayUs(nus)        cpu_Delay( (uint32_t)(nus)*CPU_TIMER_HZ/1000000 )
+#define cpu_DelayMs(nms)        cpu_Delay( (uint32_t)(nms)*CPU_TIMER_HZ/1000 )
 
 /* 接口函数 ------------------------------------------------------------------*/
 void cpu_TickInit(void);
